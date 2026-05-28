@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Recommendation SK</title>
+    <title>TravelBloom</title>
+
     <link rel="stylesheet" href="travel_recommendation.css">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
 
     <!-- Navbar -->
     <nav class="navbar">
-        <h1 class="logo">Travel Explorer</h1>
+
+        <div class="logo-section">
+            <i class="fa-solid fa-plane-departure"></i>
+            <h1>TravelBloom</h1>
+        </div>
 
         <ul class="nav-links">
             <li><a href="travel_recommendation.html">Home</a></li>
@@ -18,28 +29,58 @@
             <li><a href="contact.html">Contact Us</a></li>
         </ul>
 
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search beach, temple, country">
+        <div class="search-box">
+            <input type="text" id="searchInput"
+                placeholder="Enter a destination or keyword">
+
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+
             <button onclick="searchRecommendations()">Search</button>
-            <button onclick="clearResults()">Reset</button>
+
+            <button onclick="clearResults()">Clear</button>
         </div>
+
     </nav>
 
-    <!-- Home Section -->
-    <section class="hero">
-        <div class="overlay">
-            <h2>Explore Your Dream Destination</h2>
-            <p>
-                Discover beautiful beaches, ancient temples,
-                and amazing countries around the world.
-            </p>
+    <!-- Hero Section -->
+    <section class="hero-section">
+
+        <!-- Social Icons -->
+        <div class="social-icons">
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-facebook-f"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-youtube"></i>
         </div>
+
+        <!-- Hero Content -->
+        <div class="hero-content">
+
+            <h1>
+                EXPLORE DREAM <br>
+                DESTINATION
+            </h1>
+
+            <p>
+                The Travel Recommendation App helps users explore popular travel destinations
+                through an interactive and user-friendly interface. It allows users to search
+                for beaches, temples, countries, or specific country names to view related cities
+                along with images and descriptions.
+            </p>
+
+            <button class="book-btn">
+                Book Now
+            </button>
+
+        </div>
+
     </section>
 
-    <!-- Recommendation Results -->
+    <!-- Results -->
     <section id="results" class="results-grid"></section>
 
     <script src="travel_recommendation.js"></script>
 
 </body>
+
 </html>

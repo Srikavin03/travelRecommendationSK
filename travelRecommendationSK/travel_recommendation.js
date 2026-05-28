@@ -1,104 +1,115 @@
 let travelData = {};
 
-// Fetch JSON data
+// Fetch API Data
 fetch('travel_recommendation_api.json')
     .then(response => response.json())
     .then(data => {
+
         travelData = data;
+
         console.log(data);
+
     })
     .catch(error => {
-        console.log('Error fetching data:', error);
+
+        console.log("Error fetching JSON:", error);
+
     });
 
-// Search Recommendations
+
+// Search Function
 function searchRecommendations() {
 
-    const input = document.getElementById('searchInput').value.toLowerCase();
+    const input = document.getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
 
-    const resultsContainer = document.getElementById('results');
+    const resultsContainer = document.getElementById("results");
 
-    resultsContainer.innerHTML = '';
+    resultsContainer.innerHTML = "";
 
-    // Beaches
-    if (input === 'beach' || input === 'beaches') {
+    // BEACHES
+    if (input === "beach" || input === "beaches") {
 
         displayResults(travelData.beaches);
 
     }
 
-    // Temples
-    else if (input === 'temple' || input === 'temples') {
+    // TEMPLES
+    else if (input === "temple" || input === "temples") {
 
         displayResults(travelData.temples);
 
     }
 
-    // Countries
-    else if (
-        input === 'country' ||
-        input === 'countries' ||
-        input === 'australia' ||
-        input === 'japan' ||
-        input === 'brazil'
-    ) {
+    // COUNTRIES
+    else {
 
-        let countryResults = [];
+        let matched = false;
 
         travelData.countries.forEach(country => {
 
             if (
-                input === 'country' ||
-                input === 'countries' ||
+                input === "country" ||
+                input === "countries" ||
                 country.name.toLowerCase() === input
             ) {
 
-                country.cities.forEach(city => {
-                    countryResults.push(city);
-                });
+                displayResults(country.cities);
+
+                matched = true;
             }
         });
 
-        displayResults(countryResults);
+        if (!matched &&
+            input !== "country" &&
+            input !== "countries") {
 
-    }
-
-    else {
-
-        resultsContainer.innerHTML = `
-            <h2>No recommendations found.</h2>
-        `;
+            resultsContainer.innerHTML = `
+                <h2>No recommendations found.</h2>
+            `;
+        }
     }
 }
+
 
 // Display Results
 function displayResults(results) {
 
-    const resultsContainer = document.getElementById('results');
+    const resultsContainer = document.getElementById("results");
 
-    results.forEach(item => {
+    results.forEach(place => {
 
-        const card = document.createElement('div');
+        const card = document.createElement("div");
 
-        card.classList.add('card');
+        card.classList.add("card");
 
         card.innerHTML = `
-            <img src="${item.imageUrl}" alt="${item.name}">
+
+            <img src="${place.imageUrl}" alt="${place.name}">
 
             <div class="card-content">
-                <h3>${item.name}</h3>
-                <p>${item.description}</p>
+
+                <h3>${place.name}</h3>
+
+                <p>${place.description}</p>
+
             </div>
         `;
 
         resultsContainer.appendChild(card);
+
     });
+
 }
+
 
 // Clear Results
 function clearResults() {
 
-    document.getElementById('results').innerHTML = '';
+    document.getElementById("results").innerHTML = "";
 
-    document.getElementById('searchInput').value = '';
+    document.getElementById("searchInput").value = "";
+
 }
